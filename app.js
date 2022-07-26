@@ -10,7 +10,7 @@ const usersRouter = require('./routes/users')
 const loginRouter = require('./routes/auth')
 const reqArticleRouter = require('./routes/requestArticle.js')
 const mongoose = require("mongoose")
-const { Configuration, OpenAIApi } = require("openai")
+//const { Configuration, OpenAIApi } = require("openai")
 const cors = require("cors")
 var bodyParser = require('body-parser')
 
