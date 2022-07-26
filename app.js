@@ -1,9 +1,9 @@
 //var createError = require('http-errors')
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-require("dotenv").config()
+const express = require('express')
+//const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const config = require('./utils/config')
 require('express-async-errors')
 const articleRouter = require('./routes/article')
 const usersRouter = require('./routes/users')
@@ -12,12 +12,12 @@ const reqArticleRouter = require('./routes/requestArticle.js')
 const mongoose = require("mongoose")
 //const { Configuration, OpenAIApi } = require("openai")
 const cors = require("cors")
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
-var app = express()
+const app = express()
 
 //db connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(config.MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })
@@ -81,10 +81,6 @@ app.use((err, req, res, next) => {
   const status = err.status || 500
   res.status(status)
   res.render('error')
-})
-
-app.listen(process.env.PORT, () => {
-  console.log(`Backend is running on port ${process.env.PORT}`)
 })
 
 
