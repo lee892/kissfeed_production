@@ -25,9 +25,6 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log('error connecting to MongoDB:', error.message)
   })
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
