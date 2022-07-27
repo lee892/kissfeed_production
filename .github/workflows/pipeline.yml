@@ -1,0 +1,33 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+
+jobs:
+  simple_deployment_pipeline:
+    if: ${{github.event_name == 'push'}}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "kissfeed" #Must be unique in Heroku
+          heroku_email: "mlee892@ku.edu"
+          healthcheck: "https://kissfeed.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
+      - name: npm install
+        run: cd server & npm install
+      - name: lint
+        run: cd server & npm run eslint
+      - name: test
+        run: cd server & npm test
