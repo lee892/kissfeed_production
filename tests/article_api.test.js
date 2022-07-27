@@ -21,7 +21,7 @@ test('articles returned as json', async () => {
         .get('/api/articles')
         .expect(200)
         .expect('Content-Type', /application\/json/)
-})
+}, 6000)
 
 test('all articles are returned', async () => {
     const response = await api.get('/api/articles')
