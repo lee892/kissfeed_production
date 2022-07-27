@@ -3,8 +3,7 @@ const express = require('express')
 //const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-//const config = require('./utils/config')
-require('dotenv').config()
+const config = require('./utils/config')
 require('express-async-errors')
 const articleRouter = require('./routes/article')
 const usersRouter = require('./routes/users')
@@ -20,7 +19,7 @@ const app = express()
 
 
 //db connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(config.MONGODB_URI)
     .then(() => {
         console.log('connected to MongoDB')
     })
