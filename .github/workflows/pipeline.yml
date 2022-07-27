@@ -30,7 +30,7 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo TEST_MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
           echo SECRET=${{ secrets.SECRET }} >> .env
       - name: test
         run: npm test
