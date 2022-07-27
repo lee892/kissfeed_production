@@ -17,6 +17,7 @@ const middleware = require('./utils/middleware')
 
 const app = express()
 
+
 //db connection
 mongoose.connect(config.MONGODB_URI)
     .then(() => {
