@@ -27,11 +27,6 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
-      - name: create env file
-        run: |
-          touch .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo SECRET=${{ secrets.SECRET }} >> .env
       - name: test
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
