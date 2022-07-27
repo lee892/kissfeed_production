@@ -26,8 +26,8 @@ jobs:
           healthcheck: "https://kissfeed.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
       - name: npm install
-        run: cd server & npm install
+        run: npm install
       - name: lint
-        run: cd server & npm run eslint
+        run: npm run eslint
       - name: test
-        run: cd server & npm test
+        run: npm test
