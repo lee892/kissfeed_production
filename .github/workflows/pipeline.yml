@@ -33,5 +33,7 @@ jobs:
           echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
           echo SECRET=${{ secrets.SECRET }} >> .env
       - name: test
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npm test
 
