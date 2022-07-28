@@ -68,6 +68,9 @@ articleRouter.put('/:id', async (req, res) => {
 
     const article = req.body
     console.log(article)
+    if (!article.users) {
+        return res.status(400).json({ error: 'article requires property users' })
+    }
     const remove = article.users.includes(user._id.toString())
 
     article.users = remove
@@ -80,6 +83,9 @@ articleRouter.put('/:id', async (req, res) => {
         article,
         { new: true, runValidator: true, context: 'query' }
     )
+    if (!updatedArticle) {
+        return res.status(400).json({ error: 'invalid id or article info' })
+    }
 
     user.favorites = remove
         ? user.favorites.filter(articleId => articleId.toString() !== article.id)

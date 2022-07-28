@@ -13,6 +13,9 @@ userRouter.get('/', async (req, res) => {
 userRouter.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id)
 
+    if (!user) {
+        return res.status(400).json({ error: 'invalid user id' })
+    }
     res.json({
         followed: user.followed,
         articleCount: user.articleCount
@@ -45,7 +48,9 @@ userRouter.put('/', async (req, res) => {
     const { username, followed, articleCount } = req.body
 
     const user = await User.findOne({ username })
-
+    if (!user) {
+        return res.status(400).json({ error: 'invalid username' })
+    }
     user.followed = followed
     user.articleCount = articleCount
     console.log(user)

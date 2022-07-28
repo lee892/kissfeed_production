@@ -4,23 +4,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
 
-loginRouter.post('/register', async (req,res) => {
-    //De-structure the request body json
-    const {username, email, password} = req.body
-    try{
-        //generate hashed password
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(password, salt)
-        //generate new user
-        const newUser = new User({username,email,password:hashedPassword})
-        //save user to DB
-        const user = await newUser.save()
-        res.status(200).send(user)
-    } catch(e) {
-        console.log(e)
-    }
-})
-
 loginRouter.post('/', async (req,res) => {
     const {username, password} = req.body
 

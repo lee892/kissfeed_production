@@ -32,6 +32,19 @@ const articlesInDb = async () => {
     return articles.map(article => article.toJSON())
 }
 
+const nonExistingId = async () => {
+    const article = new Article({
+        source: 'source',
+        title: 'title',
+        link: 'link'
+    })
+    await article.save()
+    await article.remove()
+
+    return article._id.toString()
+}
+
 module.exports = {
-    initialArticles, articlesInDb
+    initialArticles, articlesInDb,
+    nonExistingId
 }
